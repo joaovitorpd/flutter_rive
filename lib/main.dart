@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+
 
   // This widget is the root of your application.
   @override
@@ -19,21 +19,41 @@ class MyApp extends StatelessWidget {
 }
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+
 
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+  String _anim = "spin1";
+  String _img = "assets/AnimGears.riv";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Container(
-          width: 150,
-          height: 150,
-          child: const RiveAnimation.asset("assets/AnimGears.riv", animations: ["spin1"],),
+        child: GestureDetector(
+          onTap: () {
+            setState(() {
+              if(_anim == "spin1") {
+                _anim = "spin2";
+              }else {
+                _anim = "spin1";
+              }
+              _img = "assets/AnimGears.riv";
+            });
+            print(_anim);
+          },
+          child: Container(
+            width: 150,
+            height: 150,
+            child: RiveAnimation.asset(
+              _img,
+              animations: [_anim],
+              
+            ),
+          ),
         ),
       ),
     );
